@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery – Amrita Agro Industries</title>
+<link rel="icon" type="image/jpeg" href="photos/logo-main.jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ── GALLERY PAGE ── */
+  .gallery-hero {
+    background: linear-gradient(160deg, #1B5E20, #2E7D32);
+    padding: 8rem 6% 4rem;
+    text-align: center;
+  }
+
+  .gallery-hero h1 {
+    font-family: 'Yatra One', cursive;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: #FFF8E1;
+    margin-bottom: 0.5rem;
+  }
+
+  .gallery-hero p {
+    color: rgba(255,255,255,0.75);
+    font-size: 1rem;
+  }
+
+  /* TABS */
+  .gallery-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2.5rem 6% 1rem;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    background: white;
+    border: 2px solid rgba(212,160,23,0.3);
+    color: #4E342E;
+    padding: 0.6rem 1.8rem;
+    border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s;
+    letter-spacing: 0.5px;
+  }
+
+  .tab-btn:hover {
+    border-color: #D4A017;
+    color: #1B5E20;
+  }
+
+  .tab-btn.active {
+    background: #1B5E20;
+    border-color: #1B5E20;
+    color: white;
+    box-shadow: 0 4px 15px rgba(27,94,32,0.3);
+  }
+
+  /* GRID */
+  .gallery-section { padding: 1.5rem 6% 5rem; }
+
+  .gallery-grid {
+    columns: 3;
+    column-gap: 1rem;
+    display: none;
+  }
+
+  .gallery-grid.active { display: block; }
+
+  .gallery-item {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  }
+
+  .gallery-item img {
+    width: 100%;
+    display: block;
+    border-radius: 12px;
+    transition: transform 0.4s ease;
+  }
+
+  .gallery-item:hover img { transform: scale(1.04); }
+
+  .gallery-item .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(27,94,32,0.7), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+    border-radius: 12px;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+  }
+
+  .gallery-item:hover .overlay { opacity: 1; }
+
+  .overlay span {
+    color: white;
+    font-size: 1.5rem;
+  }
+
+  /* LIGHTBOX */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .lightbox.open { display: flex; }
+
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 1.2rem; right: 1.5rem;
+    color: white;
+    font-size: 2.5rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    line-height: 1;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+
+  .lightbox-close:hover { opacity: 1; }
+
+  .lightbox-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(255,255,255,0.3);
+    color: white;
+    font-size: 2rem;
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .lightbox-arrow:hover { background: rgba(212,160,23,0.5); }
+  .lightbox-arrow.prev { left: 1rem; }
+  .lightbox-arrow.next { right: 1rem; }
+
+  /* Back button */
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+  .back-btn:hover { opacity: 1; }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .gallery-grid { columns: 2; }
+    .gallery-hero { padding: 7rem 5% 3rem; }
+    .gallery-section { padding: 1rem 4% 4rem; }
+  }
+
+  @media (max-width: 480px) {
+    .gallery-grid { columns: 1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR (same as main site) -->
+<nav id="navbar">
+  <a class="nav-logo" href="index.html">
+    <img src="photos/logo-main.jpeg" alt="Amrita Agro Industries" class="nav-logo-img">
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#products">Products</a></li>
+    <li><a href="index.html#why">Why Us</a></li>
+    <li><a href="index.html#distributor">Distributors</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="index.html#distributor" class="nav-cta">Become Distributor</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="gallery-hero">
+  <a href="index.html" class="back-btn">← Back to Home</a>
+  <h1>Our <span style="color:#D4A017">Gallery</span></h1>
+  <p>A glimpse into our production unit, products & team</p>
+</div>
+
+<!-- TABS -->
+<div class="gallery-tabs">
+  <button class="tab-btn active" onclick="switchTab('factory')">🏭 Factory</button>
+  <button class="tab-btn" onclick="switchTab('products')">🌾 Products</button>
+  <button class="tab-btn" onclick="switchTab('team')">👥 Team</button>
+</div>
+
+<!-- GALLERY GRIDS -->
+<div class="gallery-section">
+
+  <!-- FACTORY TAB -->
+  <div class="gallery-grid active" id="tab-factory">
+    <div class="gallery-item" onclick="openLightbox('factory', 0)">
+      <img src="photos/galary/factory-1.jpeg" alt="Factory">
+      <div class="overlay"><span>🔍</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('factory', 1)">
+      <img src="photos/galary/factory-2.jpeg" alt="Factory">
+      <div class="overlay"><span>🔍</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('factory', 2)">
+      <img src="photos/galary/factory-3.jpeg" alt="Factory">
+      <div class="overlay"><span>🔍</span></div>
+    </div>
+    <!-- Add more factory images here following same pattern -->
+  </div>
+
+  <!-- PRODUCTS TAB -->
+  <div class="gallery-grid" id="tab-products">
+    <div class="gallery-item" onclick="openLightbox('products', 0)">
+      <img src="photos/galary/products-1.jpeg" alt="Products">
+      <div class="overlay"><span>🔍</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('products', 1)">
+      <img src="photos/galary/products-2.jpeg" alt="Products">
+      <div class="overlay"><span>🔍</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('products', 2)">
+      <img src="photos/galary/products-3.jpeg" alt="Products">
+      <div class="overlay"><span>🔍</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('products', 0)">
+      <img src="photos/galary/products-1.jpeg" alt="Products">
+      <div class="overlay"><span>🔍</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('products', 1)">
+      <img src="photos/galary/products-2.jpeg" alt="Products">
+      <div class="overlay"><span>🔍</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('products', 2)">
+      <img src="photos/galary/products-3.jpeg" alt="Products">
+      <div class="overlay"><span>🔍</span></div>
+    </div>
+    
+    <!-- Add more product images here -->
+  </div>
+
+  <!-- TEAM TAB -->
+  <div class="gallery-grid" id="tab-team">
+    <div class="gallery-item" onclick="openLightbox('team', 0)">
+      <img src="photos/galary/team-1.jpeg" alt="Team">
+      <div class="overlay"><span>🔍</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('team', 1)">
+      <img src="photos/galary/team-2.jpeg" alt="Team">
+      <div class="overlay"><span>🔍</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('team', 2)">
+      <img src="photos/galary/team-3.jpeg" alt="Team">
+      <div class="overlay"><span>🔍</span></div>
+    </div>
+    <!-- Add more team images here -->
+  </div>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-arrow prev" onclick="shiftLightbox(-1)">&#8249;</button>
+  <img id="lightbox-img" src="" alt="">
+  <button class="lightbox-arrow next" onclick="shiftLightbox(1)">&#8250;</button>
+</div>
+
+<script src="script.js"></script>
+<script>
+  // Tab switching
+  function switchTab(tab) {
+    document.querySelectorAll('.gallery-grid').forEach(g => g.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+    event.target.classList.add('active');
+    currentTab = tab;
+  }
+
+  // Lightbox
+  const images = {
+    factory:  ['factory-1.jpg',  'factory-2.jpg',  'factory-3.jpg'],
+    products: ['products-1.jpg', 'products-2.jpg', 'products-3.jpg'],
+    team:     ['team-1.jpg',     'team-2.jpg',     'team-3.jpg']
+  };
+
+  let currentTab = 'factory';
+  let currentIndex = 0;
+
+  function openLightbox(tab, index) {
+    currentTab = tab;
+    currentIndex = index;
+    document.getElementById('lightbox-img').src = images[tab][index];
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function shiftLightbox(dir) {
+    const list = images[currentTab];
+    currentIndex = (currentIndex + dir + list.length) % list.length;
+    document.getElementById('lightbox-img').src = list[currentIndex];
+  }
+
+  // Close lightbox on background click
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') shiftLightbox(1);
+    if (e.key === 'ArrowLeft') shiftLightbox(-1);
+  });
+</script>
+</body>
+</html>
