@@ -1,21 +1,615 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Amrita Agro Industries — Premium Cattle Feed, Mustard Oil and Churi from Shekhupur Droli, Fatehabad, Haryana." />
-    <meta name="theme-color" content="#2C2416" />
 
-    <!-- Favicon (overridden by React at runtime, this is the static fallback) -->
-    <link rel="icon" type="image/jpeg" href="/photos/logo-main.jpeg" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amrita Agro Industries – Manufacturer of Cattle Feed &amp; Edible Oil</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Source+Sans+3:wght@300;400;500;600;700&family=Teko:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
 
-    <title>Amrita Agro Industries</title>
-  </head>
-  <body>
-    <!-- React mounts here -->
-    <div id="root"></div>
+<body>
 
-    <!-- Vite injects the bundled JS automatically from src/main.jsx -->
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+  <!-- ==============================
+       HEADER
+  =============================== -->
+  <header id="main-header">
+    <div class="container header-inner">
+      <a href="#home" class="logo-wrap">
+        <div class="logo-box">
+          <img src="logo.png" alt="Amrita Agro Industries" id="logo-img"
+            onerror="this.style.display='none';document.getElementById('logo-fallback').style.display='flex'" />
+          <span id="logo-fallback" class="logo-fallback" style="display:none">AAI</span>
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">Amrita Agro</span>
+          <span class="logo-sub">Industries</span>
+        </div>
+      </a>
+
+      <nav class="main-nav" id="main-nav">
+        <ul>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#products" class="nav-link">Products</a></li>
+          <li><a href="#quality" class="nav-link">Why Us</a></li>
+          <li><a href="#distributors" class="nav-link">Distributors</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <a href="#distributors" class="btn btn-header-enquiry">
+        <i data-lucide="send"></i> Get a Quote
+      </a>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+
+  <!-- ==============================
+       HERO + MAIN SLIDER
+  ================================
+  FILE PATHS FOR ALL IMAGES:
+  ─────────────────────────────────
+  logo.png                  → Logo (same folder as index.html)
+  slides/slide1.jpg         → Hero Slide 1 background
+  slides/slide2.jpg         → Hero Slide 2 background
+  slides/slide3.jpg         → Hero Slide 3 background
+  slides/video1.mp4         → (optional) Video for any slide
+  thumbs/thumb1.jpg         → Thumbnail strip Slide 1
+  thumbs/thumb2.jpg         → Thumbnail strip Slide 2
+  thumbs/thumb3.jpg         → Thumbnail strip Slide 3
+  about/factory.jpg         → Factory photo in About section
+  ─────────────────────────────────
+  =============================== -->
+  <section id="home" class="hero-section">
+
+    <div class="hero-slider" id="hero-slider">
+
+      <!-- Slide 1: Image -->
+      <div class="slide active"
+        style="background:url('slides/slide1.jpeg') center/cover no-repeat,linear-gradient(140deg,#1a3a0a,#2e5c12,#4a7c1e)">
+      </div>
+
+      <!-- Slide 2: VIDEO — place file at slides/video1.mp4 -->
+      <div class="slide slide-video-wrap">
+        <video class="slide-video" src="slides/video1.mp4" muted playsinline loop preload="none"></video>
+      </div>
+
+      <!-- Slide 3: Image -->
+      <div class="slide"
+        style="background:url('slides/slide2.jpeg') center/cover no-repeat,linear-gradient(140deg,#3b1e06,#6b3a10,#8b5c1a)">
+      </div>
+
+      <!-- Slide 4: video -->
+
+      <div class="slide slide-video-wrap">
+        <video class="slide-video" src="slides/video2.mp4" muted playsinline loop preload="none"></video>
+      </div>
+
+      <!-- Slide 5: Image -->
+      <div class="slide"
+        style="background:url('slides/slide3.jpeg') center/cover no-repeat,linear-gradient(140deg,#0a2a1a,#145c30,#1a7c3e)">
+        <div class="slide-inner">
+          <div class="slide-grain"></div>
+          <span class="slide-badge">Cold-Pressed Goodness</span>
+          <div class="slide-icon-svg"><i data-lucide="droplets" stroke-width="1"></i></div>
+          <p class="slide-cap">Mustard Edible Oil – Kachi Ghani Process</p>
+        </div>
+      </div>
+
+      <button class="sl-btn sl-prev" id="slider-prev"><i data-lucide="chevron-left"></i></button>
+      <button class="sl-btn sl-next" id="slider-next"><i data-lucide="chevron-right"></i></button>
+      <div class="sl-dots" id="slider-dots">
+        <span class="dot active" data-index="0"></span>
+        <span class="dot" data-index="1"></span>
+        <span class="dot" data-index="2"></span>
+        <span class="dot" data-index="3"></span>
+      </div>
+    </div>
+
+    <!-- HERO TEXT -->
+    <div class="hero-content">
+      <div class="hero-badge"><span class="badge-dot"></span>Manufacturer · Fatehabad, Haryana</div>
+      <h1 class="hero-heading reveal-up">Amrita Agro<br /><em>Industries</em></h1>
+      <p class="hero-sub reveal-up delay-1">Manufacturer and supplier of premium cattle feed, mustard edible oil, and
+        Kachi Ghani Binola Khal — trusted by farmers across India.</p>
+      <div class="hero-actions reveal-up delay-2">
+        <a href="#products" class="btn btn-primary"><i data-lucide="package"></i> Explore Products</a>
+        <a href="#distributors" class="btn btn-ghost"><i data-lucide="send"></i> Get a Quote</a>
+      </div>
+      <div class="hero-trust reveal-up delay-3">
+        <div class="trust-item"><i data-lucide="shield-check"></i> Verified Supplier</div>
+        <div class="trust-item"><i data-lucide="truck"></i> Timely Delivery</div>
+        <div class="trust-item"><i data-lucide="star"></i> Quality Assured</div>
+      </div>
+    </div>
+
+    <!-- THUMBNAIL STRIP SLIDER (after hero text) -->
+    <div class="thumb-strip">
+      <div class="thumb-track" id="thumb-track">
+        <div class="thumb-item active" data-slide="0">
+          <div class="thumb-img"
+            style="background:url('thumbs/thumb1.jpeg') center/cover no-repeat, linear-gradient(135deg,#2e5c12,#4a7c1e)">
+          </div>
+          <span>Cattle Feed</span>
+        </div>
+        <div class="thumb-item" data-slide="1">
+          <div class="thumb-img"
+            style="background:url('thumbs/thumb-video.jpeg') center/cover no-repeat, linear-gradient(135deg,#1a3a0a,#2a2a1e)">
+            <div class="thumb-overlay thumb-play"><i data-lucide="play-circle"></i></div>
+          </div>
+          <span>Our Factory</span>
+        </div>
+        <div class="thumb-item" data-slide="2">
+          <div class="thumb-img"
+            style="background:url('thumbs/thumb2.jpeg') center/cover no-repeat, linear-gradient(135deg,#6b3a10,#8b5c1a)">
+          </div>
+          <span>Binola Khal</span>
+        </div>
+        <div class="thumb-item" data-slide="3">
+          <div class="thumb-img"
+            style="background:url('thumbs/thumb3.jpeg') center/cover no-repeat, linear-gradient(135deg,#7a5c10,#c9a84c)">
+          </div>
+          <span>Mustard Oil</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ==============================
+       ABOUT  (new dark "Rooted" style)
+  =============================== -->
+  <section id="about" class="about-section">
+
+    <!-- DARK STORY BANNER -->
+    <div class="story-banner">
+      <div class="story-grain"></div>
+      <div class="container story-inner">
+        <span class="story-eyebrow">Our Story</span>
+        <h2 class="story-title reveal-up">Rooted in the Soil of <em>Haryana</em></h2>
+        <p class="story-p reveal-up delay-1">Born in the heartland of Haryana, Amrita Agro Industries began with a
+          simple belief — that what comes from the earth, in its purest form, is what nourishes best. Our production
+          unit in Shekhupur Droli, Fatehabad carries the spirit of generations of farming families.</p>
+        <p class="story-p reveal-up delay-2">We blend time-honored agricultural knowledge with modern manufacturing
+          practices — strengthening the rural economy, creating local employment, and supplying reliable, high-quality
+          agro products to distributors and retailers across the region.</p>
+        <div class="story-values reveal-up delay-3">
+          <div class="sv-item">
+            <div class="sv-ico"><i data-lucide="star"></i></div><span>Purity First</span>
+          </div>
+          <div class="sv-item">
+            <div class="sv-ico"><i data-lucide="handshake"></i></div><span>Built on Trust</span>
+          </div>
+          <div class="sv-item">
+            <div class="sv-ico"><i data-lucide="leaf"></i></div><span>Quality at Core</span>
+          </div>
+          <div class="sv-item">
+            <div class="sv-ico"><i data-lucide="trending-up"></i></div><span>Rural Strength</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT DETAIL + FACTORY PHOTO -->
+    <div class="about-detail section">
+      <div class="container">
+        <div class="about-detail-grid">
+
+          <!-- Factory photo -->
+          <div class="factory-photo-wrap reveal-left">
+            <div class="factory-photo">
+              <img src="about/factory.jpeg" alt="Amrita Agro Industries Factory"
+                onerror="this.parentElement.classList.add('no-img')" />
+              <div class="factory-placeholder">
+                <i data-lucide="factory"></i>
+                <span>Factory Photo<br /><small>Place file at: <code>about/factory.jpg</code></small></span>
+              </div>
+            </div>
+            <div class="factory-tag"><i data-lucide="map-pin"></i> Shekhupur Droli, Fatehabad</div>
+          </div>
+
+          <!-- Info cards + features -->
+          <div class="about-right reveal-right">
+            <div class="section-header left-align" style="margin-bottom:28px">
+              <span class="section-tag">Who We Are</span>
+              <h2 class="section-title">About Amrita Agro Industries</h2>
+              <div class="divider left-align"><span></span><span class="orn">✦</span><span></span></div>
+            </div>
+
+
+
+            <div class="about-info-row">
+              <div class="info-card">
+                <div class="ic-ico"><i data-lucide="map-pin"></i></div>
+                <div><strong>Location</strong><span>Shekhupur Daroli, Fatehabad, Haryana</span></div>
+              </div>
+              <div class="info-card">
+                <div class="ic-ico"><i data-lucide="factory"></i></div>
+                <div><strong>Business Type</strong><span>Manufacturer &amp; Supplier</span></div>
+              </div>
+              <div class="info-card">
+                <div class="ic-ico"><i data-lucide="leaf"></i></div>
+                <div><strong>Products</strong><span>Feed, Oil &amp; Khal</span></div>
+              </div>
+              <div class="info-card">
+                <div class="ic-ico"><i data-lucide="users"></i></div>
+                <div><strong>Customers</strong><span>Farmers &amp; Dairy Owners</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Features Strip -->
+        <div class="features-strip">
+          <div class="feat">
+            <div class="feat-ico"><i data-lucide="badge-check"></i></div>
+            <h4>Verified<br />Supplier</h4>
+          </div>
+          <div class="feat">
+            <div class="feat-ico"><i data-lucide="wheat"></i></div>
+            <h4>Pure Raw<br />Materials</h4>
+          </div>
+          <div class="feat">
+            <div class="feat-ico"><i data-lucide="microscope"></i></div>
+            <h4>Quality<br />Checked</h4>
+          </div>
+          <div class="feat">
+            <div class="feat-ico"><i data-lucide="truck"></i></div>
+            <h4>On-Time<br />Delivery</h4>
+          </div>
+          <div class="feat">
+            <div class="feat-ico"><i data-lucide="handshake"></i></div>
+            <h4>Farmer<br />Trusted</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==============================
+       PRODUCTS
+  =============================== -->
+  <section id="products" class="products-section section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag invert">Our Range</span>
+        <h2 class="section-title invert">Our Products</h2>
+        <div class="divider invert"><span></span><span class="orn">✦</span><span></span></div>
+        <p class="sec-desc">Farm-grade products manufactured with purity and reliability at every step.</p>
+      </div>
+      <div class="products-grid">
+        <div class="prod-card reveal-up">
+          <div class="prod-visual" style="background:linear-gradient(135deg,#2e5c12,#4a7c1e)">
+            <div class="prod-svg-icon"><i data-lucide="wheat" stroke-width="1.2"></i></div>
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Animal Nutrition</span>
+            <h3 class="prod-name">Mesh Cattle Feed</h3>
+            <p class="prod-desc">High-quality mesh cattle feed manufactured using premium agricultural by-products.
+              Nutritionally balanced to support healthy livestock.</p>
+            <ul class="prod-list">
+              <li>Rich in essential nutrients &amp; protein</li>
+              <li>Supports healthy growth in cattle</li>
+              <li>Improves milk yield in dairy animals</li>
+              <li>Made from quality raw materials</li>
+            </ul>
+            <button class="btn btn-enquire" onclick="openEnquiry('Mesh Cattle Feed')"><i data-lucide="send"></i> Enquire
+              Now</button>
+          </div>
+        </div>
+        <div class="prod-card featured reveal-up delay-1">
+          <div class="prod-visual" style="background:linear-gradient(135deg,#4a2c0a,#7d4e1e)">
+            <div class="prod-svg-icon"><i data-lucide="layers" stroke-width="1.2"></i></div>
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Feed Supplement</span>
+            <h3 class="prod-name">Kachi Ghani Binola Khal</h3>
+            <p class="prod-desc">Cotton seed cake cold-pressed using the Kachi Ghani process, preserving natural
+              nutrients. A protein-rich supplement widely used across Haryana.</p>
+            <ul class="prod-list">
+              <li>High protein content for cattle</li>
+              <li>Natural cold-pressed process</li>
+              <li>Widely used by dairy farmers</li>
+              <li>Available in bulk quantities</li>
+            </ul>
+            <button class="btn btn-enquire" onclick="openEnquiry('Kachi Ghani Binola Khal')"><i data-lucide="send"></i>
+              Enquire Now</button>
+          </div>
+        </div>
+        <div class="prod-card reveal-up delay-2">
+          <div class="prod-visual" style="background:linear-gradient(135deg,#7a5c10,#c9a84c)">
+            <div class="prod-svg-icon"><i data-lucide="droplets" stroke-width="1.2"></i></div>
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Edible Oil</span>
+            <h3 class="prod-name">Mustard Edible Oil</h3>
+            <p class="prod-desc">Pure mustard edible oil extracted using the traditional Kachi Ghani (cold-press)
+              method. Retains natural aroma, taste, and nutritional benefits.</p>
+            <ul class="prod-list">
+              <li>Traditional Kachi Ghani process</li>
+              <li>Rich natural aroma &amp; flavor</li>
+              <li>Free from artificial additives</li>
+              <li>Suitable for cooking &amp; food use</li>
+            </ul>
+            <button class="btn btn-enquire" onclick="openEnquiry('Mustard Edible Oil')"><i data-lucide="send"></i>
+              Enquire Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==============================
+       WHY US
+  =============================== -->
+  <section id="quality" class="whyus-section section">
+    <div class="container">
+      <div class="whyus-header">
+        <span class="whyus-eyebrow">Our Advantage</span>
+        <h2 class="whyus-title reveal-up">Why Retailers Trust Us</h2>
+      </div>
+      <div class="whyus-grid">
+        <div class="whyus-cards">
+          <div class="wu-card reveal-left">
+            <div class="wu-ico"><i data-lucide="bar-chart-2"></i></div>
+            <h3>Direct from Production</h3>
+            <p>No middlemen — straight from our Shekhupur Droli unit to your business.</p>
+          </div>
+          <div class="wu-card reveal-left delay-1">
+            <div class="wu-ico"><i data-lucide="shield-check"></i></div>
+            <h3>Quality Tested</h3>
+            <p>Every batch checked for purity, consistency and nutritional value.</p>
+          </div>
+          <div class="wu-card reveal-left delay-2">
+            <div class="wu-ico"><i data-lucide="leaf"></i></div>
+            <h3>Pure Ingredients</h3>
+            <p>Locally sourced Haryana raw materials — nothing artificial, ever.</p>
+          </div>
+        </div>
+        <div class="wu-trust-card reveal-right">
+          <div class="wu-trust-icon"><i data-lucide="award"></i></div>
+          <h3 class="wu-trust-heading">Trusted by Local Retailers Across the Region</h3>
+          <p class="wu-trust-desc">We are not just a manufacturer — we are a long-term partner. Built on lasting
+            relationships with retailers and distributors across Fatehabad and beyond — through honest pricing, reliable
+            product quality, and genuine commitment to rural India.</p>
+          <div class="wu-stats">
+            <div class="wu-stat"><span class="wu-stat-num">17+</span><span class="wu-stat-lbl">Products</span></div>
+            <div class="wu-stat"><span class="wu-stat-num">100%</span><span class="wu-stat-lbl">Pure Ingredients</span>
+            </div>
+            <div class="wu-stat"><span class="wu-stat-num">Bulk</span><span class="wu-stat-lbl">Supply Ready</span>
+            </div>
+            <div class="wu-stat"><span class="wu-stat-num">Fast</span><span class="wu-stat-lbl">On-Time Delivery</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==============================
+       DISTRIBUTORS
+  =============================== -->
+  <section id="distributors" class="contact-section section">
+    <div class="container">
+      <div class="contact-split">
+        <div class="contact-left reveal-left">
+          <span class="contact-eyebrow">Distributor &amp; General Inquiries</span>
+          <h2 class="contact-heading">Partner With Us</h2>
+          <p class="contact-desc">We are looking for motivated retailers and distributors to grow our network across
+            Haryana and neighbouring regions. Our terms are fair, our supply is consistent, and our quality speaks for
+            itself.</p>
+          <ul class="contact-bullets">
+            <li><span class="cb-icon"><i data-lucide="badge-percent"></i></span>Competitive wholesale pricing</li>
+            <li><span class="cb-icon"><i data-lucide="repeat"></i></span>Reliable &amp; consistent supply</li>
+            <li><span class="cb-icon"><i data-lucide="trending-up"></i></span>High-demand product categories</li>
+            <li><span class="cb-icon"><i data-lucide="handshake"></i></span>Direct partnership with production unit</li>
+            <li><span class="cb-icon"><i data-lucide="users"></i></span>Dedicated support for distributors</li>
+          </ul>
+        </div>
+        <div class="contact-form-card reveal-right">
+          <h3 class="form-card-title">Send an Inquiry</h3>
+          <p class="form-card-sub">Your message will open directly in WhatsApp.</p>
+          <div class="form-row">
+            <div class="form-group"><label for="f-name">Name <span class="req">*</span></label><input type="text"
+                id="f-name" placeholder="Name" /></div>
+            <div class="form-group"><label for="f-phone">Phone <span class="req">*</span></label><input type="tel"
+                id="f-phone" placeholder="Phone" /></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label for="f-business">Business</label><input type="text" id="f-business"
+                placeholder="Business" /></div>
+            <div class="form-group"><label for="f-location">Location</label><input type="text" id="f-location"
+                placeholder="Location" /></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label for="f-email">Email</label><input type="email" id="f-email"
+                placeholder="Email (optional)" /></div>
+            <div class="form-group"><label for="f-inquiry-type">Inquiry Type</label>
+              <select id="f-inquiry-type">
+                <option value="General">General</option>
+                <option value="Distributor Inquiry">Distributor Inquiry</option>
+                <option value="Wholesale">Wholesale</option>
+                <option value="Retail">Retail</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group form-group-full">
+            <label for="f-product">Product Interest</label>
+            <select id="f-product">
+              <option value="">Select a product</option>
+              <option value="Mesh Cattle Feed">Mesh Cattle Feed</option>
+              <option value="Kachi Ghani Binola Khal">Kachi Ghani Binola Khal</option>
+              <option value="Mustard Edible Oil">Mustard Edible Oil</option>
+              <option value="All Products">All Products</option>
+            </select>
+          </div>
+          <button class="btn-wa-submit" id="send-btn">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+            Send via WhatsApp
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==============================
+       CONTACT (Map)
+  =============================== -->
+  <section id="contact" class="getintouch-section section">
+    <div class="container">
+      <div class="git-header">
+        <span class="git-eyebrow">Find Us</span>
+        <h2 class="git-title">Get in Touch</h2>
+        <p class="git-sub">We welcome retailers, distributors, and bulk buyers to reach out directly.</p>
+      </div>
+      <div class="git-grid">
+        <div class="git-left reveal-left">
+          <h3 class="git-company">Amrita Agro Industries</h3>
+          <div class="git-item">
+            <div class="git-ico"><i data-lucide="map-pin"></i></div>
+            <div><span class="git-lbl">Location</span>
+              <p>Shekhupur Droli, Fatehabad, Haryana, India</p>
+            </div>
+          </div>
+          <div class="git-item">
+            <div class="git-ico"><i data-lucide="phone"></i></div>
+            <div><span class="git-lbl">Phone</span>
+              <p><a href="tel:+919991689999">+91 9991689999</a></p>
+            </div>
+          </div>
+          <div class="git-item">
+            <div class="git-ico"><i data-lucide="mail"></i></div>
+            <div><span class="git-lbl">Email</span>
+              <p><a href="/cdn-cgi/l/email-protection#a5cccbc3cae5c4c8d7ccd1c4c4c2d7ca8bc6cac8"><span
+                    class="__cf_email__"
+                    data-cfemail="d0b9beb6bf90b1bda2b9a4b1b1b7a2bffeb3bfbd">[email&#160;protected]</span></a></p>
+            </div>
+          </div>
+          <div class="git-item">
+            <div class="git-ico"><i data-lucide="clock"></i></div>
+            <div><span class="git-lbl">Business Hours</span>
+              <p>Mon–Sat, 9:00 AM – 6:00 PM</p>
+            </div>
+          </div>
+          <div class="git-actions">
+            <a href="https://wa.me/919991689999" target="_blank" class="git-btn git-btn-wa">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+              WhatsApp
+            </a>
+            <a href="tel:+919991689999" class="git-btn git-btn-call"><i data-lucide="phone-call"></i> Call Now</a>
+          </div>
+        </div>
+        <div class="git-map-wrap reveal-right">
+          <div class="git-map">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3476.2!2d75.4567!3d29.5142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391233fa4e1cbbaf%3A0x6f5d5a4f92e3e0c1!2sShekhupur%20Daroli%2C%20Fatehabad%2C%20Haryana%20125050!5e0!3m2!1sen!2sin!4v1710000000000"
+              width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade" title="Amrita Agro Industries Location"></iframe>
+          </div>
+          <div class="git-map-footer">
+            <i data-lucide="map-pin"></i>
+            <span>Shekhupur Droli, Fatehabad, Haryana —</span>
+            <a href="https://maps.google.com/?q=Shekhupur+Daroli,+Fatehabad,+Haryana" target="_blank">Open in Maps <i
+                data-lucide="arrow-up-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==============================
+       FOOTER
+  =============================== -->
+  <footer class="main-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="f-logo-row">
+          <div class="f-logo-box">
+            <img src="logo.png" alt="Amrita Agro Industries"
+              onerror="this.parentElement.innerHTML='<span style=font-weight:700;font-size:14px;color:#1b4d2e>AAI</span>'" />
+          </div>
+          <div>
+            <strong>Amrita Agro Industries</strong>
+            <span>Manufacturer &amp; Supplier</span>
+          </div>
+        </div>
+        <p>Manufacturer of cattle feed, mustard edible oil, and Kachi Ghani Binola Khal. Based in Fatehabad, Haryana.
+        </p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#products">Our Products</a></li>
+          <li><a href="#quality">Why Us</a></li>
+          <li><a href="#distributors">Distributors</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Our Products</h4>
+        <ul>
+          <li><a href="#products">Mesh Cattle Feed</a></li>
+          <li><a href="#products">Kachi Ghani Binola Khal</a></li>
+          <li><a href="#products">Mustard Edible Oil</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact Info</h4>
+        <p><i data-lucide="map-pin"></i> Shekhupur Daroli, Fatehabad, Haryana</p>
+        <p><i data-lucide="phone"></i> <a href="tel:+919991689999">+91 99916 89999</a></p>
+        <p><i data-lucide="globe"></i> <a href="https://amritaagro.com" target="_blank">amritaagro.com</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© Amrita Agro Industries – All Rights Reserved</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- MODAL -->
+  <div id="enquiry-modal" class="modal-overlay" style="display:none">
+    <div class="modal-box">
+      <button class="modal-close" id="modal-close"><i data-lucide="x"></i></button>
+      <h3>Quick Enquiry</h3>
+      <p id="modal-prod-note" class="mpn"></p>
+      <div class="form-row">
+        <div class="form-group"><label for="m-name">Your Name *</label><input type="text" id="m-name"
+            placeholder="Enter your name" /></div>
+        <div class="form-group"><label for="m-phone">Phone Number *</label><input type="tel" id="m-phone"
+            placeholder="+91 XXXXXXXXXX" /></div>
+      </div>
+      <div class="form-group"><label for="m-msg">Message</label><textarea id="m-msg" rows="3"
+          placeholder="Any specific requirements?"></textarea></div>
+      <button class="btn btn-primary full-w" id="modal-send-btn"><i data-lucide="send"></i> Send via WhatsApp</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
 </html>
