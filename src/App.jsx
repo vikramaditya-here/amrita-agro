@@ -755,68 +755,68 @@ function InquiryForm() {
             onSubmit={handleSubmit}
             className="bg-background border-2 md:border-4 border-foreground p-4 md:p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
           >
-            <div className="space-y-4">
-              {/* Name */}
-              <div>
-                <label htmlFor="name" className="block text-sm font-bold text-foreground mb-2">Full Name *</label>
-                <input type="text" id="name" name="name" required value={form.name} onChange={handleChange}
-                  className="w-full px-4 py-3 bg-card border-4 border-foreground text-foreground font-medium focus:border-primary focus:outline-none transition-colors"
-                  placeholder="Enter your name" />
+            <div className="space-y-3">
+              {/* Row 1: Name + Phone side by side */}
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-bold text-foreground mb-1">Full Name *</label>
+                  <input type="text" id="name" name="name" required value={form.name} onChange={handleChange}
+                    className="w-full px-3 py-2 bg-card border-4 border-foreground text-foreground font-medium focus:border-primary focus:outline-none transition-colors"
+                    placeholder="Your name" />
+                </div>
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-bold text-foreground mb-1">Phone *</label>
+                  <input type="tel" id="phone" name="phone" required value={form.phone} onChange={handleChange}
+                    className="w-full px-3 py-2 bg-card border-4 border-foreground text-foreground font-medium focus:border-primary focus:outline-none transition-colors"
+                    placeholder="+91 XXXXX XXXXX" />
+                </div>
               </div>
 
-              {/* Phone */}
-              <div>
-                <label htmlFor="phone" className="block text-sm font-bold text-foreground mb-2">Phone Number *</label>
-                <input type="tel" id="phone" name="phone" required value={form.phone} onChange={handleChange}
-                  className="w-full px-4 py-3 bg-card border-4 border-foreground text-foreground font-medium focus:border-primary focus:outline-none transition-colors"
-                  placeholder="+91 XXXXX XXXXX" />
+              {/* Row 2: City + Quantity side by side */}
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label htmlFor="city" className="block text-sm font-bold text-foreground mb-1">City *</label>
+                  <input type="text" id="city" name="city" required value={form.city} onChange={handleChange}
+                    className="w-full px-3 py-2 bg-card border-4 border-foreground text-foreground font-medium focus:border-primary focus:outline-none transition-colors"
+                    placeholder="Your city" />
+                </div>
+                <div>
+                  <label htmlFor="quantity" className="block text-sm font-bold text-foreground mb-1">Quantity</label>
+                  <input type="text" id="quantity" name="quantity" value={form.quantity} onChange={handleChange}
+                    className="w-full px-3 py-2 bg-card border-4 border-foreground text-foreground font-medium focus:border-primary focus:outline-none transition-colors"
+                    placeholder="e.g., 100 kg" />
+                </div>
               </div>
 
-              {/* City */}
-              <div>
-                <label htmlFor="city" className="block text-sm font-bold text-foreground mb-2">City *</label>
-                <input type="text" id="city" name="city" required value={form.city} onChange={handleChange}
-                  className="w-full px-4 py-3 bg-card border-4 border-foreground text-foreground font-medium focus:border-primary focus:outline-none transition-colors"
-                  placeholder="Enter your city" />
+              {/* Row 3: Inquiry Type + Product side by side */}
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label htmlFor="inquiryType" className="block text-sm font-bold text-foreground mb-1">Inquiry Type *</label>
+                  <select id="inquiryType" name="inquiryType" required value={form.inquiryType} onChange={handleChange}
+                    className="w-full px-3 py-2 bg-card border-4 border-foreground text-foreground font-medium focus:border-primary focus:outline-none transition-colors">
+                    <option value="">Select type</option>
+                    {inquiryTypes.map((type) => (
+                      <option key={type} value={type}>{type}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor="product" className="block text-sm font-bold text-foreground mb-1">Product *</label>
+                  <select id="product" name="product" required value={form.product} onChange={handleChange}
+                    className="w-full px-3 py-2 bg-card border-4 border-foreground text-foreground font-medium focus:border-primary focus:outline-none transition-colors">
+                    <option value="">Select product</option>
+                    {productOptions.map((p) => (
+                      <option key={p} value={p}>{p}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
-              {/* Inquiry Type */}
+              {/* Message full width */}
               <div>
-                <label htmlFor="inquiryType" className="block text-sm font-bold text-foreground mb-2">Inquiry Type *</label>
-                <select id="inquiryType" name="inquiryType" required value={form.inquiryType} onChange={handleChange}
-                  className="w-full px-4 py-3 bg-card border-4 border-foreground text-foreground font-medium focus:border-primary focus:outline-none transition-colors">
-                  <option value="">Select inquiry type</option>
-                  {inquiryTypes.map((type) => (
-                    <option key={type} value={type}>{type}</option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Product */}
-              <div>
-                <label htmlFor="product" className="block text-sm font-bold text-foreground mb-2">Product Interested In *</label>
-                <select id="product" name="product" required value={form.product} onChange={handleChange}
-                  className="w-full px-4 py-3 bg-card border-4 border-foreground text-foreground font-medium focus:border-primary focus:outline-none transition-colors">
-                  <option value="">Select a product</option>
-                  {productOptions.map((p) => (
-                    <option key={p} value={p}>{p}</option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Quantity */}
-              <div>
-                <label htmlFor="quantity" className="block text-sm font-bold text-foreground mb-2">Quantity (Optional)</label>
-                <input type="text" id="quantity" name="quantity" value={form.quantity} onChange={handleChange}
-                  className="w-full px-4 py-3 bg-card border-4 border-foreground text-foreground font-medium focus:border-primary focus:outline-none transition-colors"
-                  placeholder="e.g., 100 kg, 50 liters" />
-              </div>
-
-              {/* Message */}
-              <div>
-                <label htmlFor="message" className="block text-sm font-bold text-foreground mb-2">Additional Message (Optional)</label>
-                <textarea id="message" name="message" rows={4} value={form.message} onChange={handleChange}
-                  className="w-full px-4 py-3 bg-card border-4 border-foreground text-foreground font-medium focus:border-primary focus:outline-none transition-colors resize-none"
+                <label htmlFor="message" className="block text-sm font-bold text-foreground mb-1">Message (Optional)</label>
+                <textarea id="message" name="message" rows={3} value={form.message} onChange={handleChange}
+                  className="w-full px-3 py-2 bg-card border-4 border-foreground text-foreground font-medium focus:border-primary focus:outline-none transition-colors resize-none"
                   placeholder="Any specific requirements or questions?" />
               </div>
 
