@@ -636,15 +636,15 @@ function InquiryForm() {
     setIsSubmitting(true)
 
     const lines = [
-      '\u{1F33E} *New Inquiry \u2013 Amrita Agro Industries*',
+      '🌾 *New Inquiry - Amrita Agro Industries*',
       '',
-      `\u{1F464} *Name:* ${form.name}`,
-      `\u{1F4DE} *Phone:* ${form.phone}`,
-      `\u{1F3D9}\uFE0F *City:* ${form.city}`,
-      `\u{1F4CB} *Inquiry Type:* ${form.inquiryType}`,
-      `\u{1F4E6} *Product:* ${form.product}`,
-      form.quantity ? `\u2696\uFE0F *Quantity:* ${form.quantity}` : null,
-      form.message ? `\u{1F4AC} *Message:* ${form.message}` : null,
+      '*Name:* ' + form.name,
+      '*Phone:* ' + form.phone,
+      '*City:* ' + form.city,
+      '*Inquiry Type:* ' + form.inquiryType,
+      '*Product:* ' + form.product,
+      form.quantity ? '*Quantity:* ' + form.quantity : null,
+      form.message ? '*Message:* ' + form.message : null,
     ].filter(Boolean).join('\n')
 
     const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(lines)
