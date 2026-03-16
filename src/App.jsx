@@ -12,9 +12,9 @@ const LOGO_SRC = '/images/logo.png'
 
 // ─── HEADER ───────────────────────────────────────────────────────────────────
 const navLinks = [
-  { href: '#about',   label: 'About' },
+  { href: '#about', label: 'About' },
   { href: '#products', label: 'Products' },
-  { href: '#dealer',  label: 'Become a Dealer' },
+  { href: '#dealer', label: 'Become a Dealer' },
   { href: '#contact', label: 'Contact' },
 ]
 
@@ -254,9 +254,8 @@ function Slideshow() {
             {slides.map((slide, index) => (
               <div
                 key={index}
-                className={`absolute inset-0 transition-opacity duration-500 ${
-                  index === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
-                }`}
+                className={`absolute inset-0 transition-opacity duration-500 ${index === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                  }`}
               >
                 {slide.type === 'image' ? (
                   <img
@@ -326,11 +325,10 @@ function Slideshow() {
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-3 h-3 border-2 border-foreground transition-all ${
-                  index === currentIndex
+                className={`w-3 h-3 border-2 border-foreground transition-all ${index === currentIndex
                     ? slide.type === 'video' ? 'bg-primary scale-125' : 'bg-secondary scale-125'
                     : 'bg-card'
-                }`}
+                  }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}
@@ -347,11 +345,10 @@ function Slideshow() {
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-4 h-4 border-4 border-foreground transition-all ${
-                  index === currentIndex
+                className={`w-4 h-4 border-4 border-foreground transition-all ${index === currentIndex
                     ? slide.type === 'video' ? 'bg-primary scale-125' : 'bg-secondary scale-125'
                     : 'bg-card hover:bg-muted'
-                }`}
+                  }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}
@@ -363,11 +360,10 @@ function Slideshow() {
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`relative w-20 h-14 flex-shrink-0 border-4 overflow-hidden transition-all ${
-                  index === currentIndex
+                className={`relative w-20 h-14 flex-shrink-0 border-4 overflow-hidden transition-all ${index === currentIndex
                     ? 'border-primary shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
                     : 'border-foreground opacity-70 hover:opacity-100'
-                }`}
+                  }`}
               >
                 {slide.type === 'image' ? (
                   <img src={slide.src} alt={slide.alt || 'Thumbnail'} className="w-full h-full object-cover" />
@@ -621,14 +617,38 @@ function Dealer() {
 const productOptions = ['Cattle Feed', 'Mustard Oil', 'Churi / Feed Mixture', 'All Products']
 const inquiryTypes = ['Retail Purchase', 'Bulk Order', 'Dealer Inquiry', 'Other']
 
+// WhatsApp number with country code (no + or spaces)
+const WHATSAPP_NUMBER = '919991689999'
+
 function InquiryForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [form, setForm] = useState({
+    name: '', phone: '', city: '', inquiryType: '', product: '', quantity: '', message: '',
+  })
 
-  const handleSubmit = async (e) => {
+  const handleChange = (e) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  }
+
+  const handleSubmit = (e) => {
     e.preventDefault()
     setIsSubmitting(true)
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+
+    const lines = [
+      '\u{1F33E} *New Inquiry \u2013 Amrita Agro Industries*',
+      '',
+      `\u{1F464} *Name:* ${form.name}`,
+      `\u{1F4DE} *Phone:* ${form.phone}`,
+      `\u{1F3D9}\uFE0F *City:* ${form.city}`,
+      `\u{1F4CB} *Inquiry Type:* ${form.inquiryType}`,
+      `\u{1F4E6} *Product:* ${form.product}`,
+      form.quantity ? `\u2696\uFE0F *Quantity:* ${form.quantity}` : null,
+      form.message ? `\u{1F4AC} *Message:* ${form.message}` : null,
+    ].filter(Boolean).join('\n')
+
+    const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(lines)
+    window.open(url, '_blank', 'noopener,noreferrer')
     setIsSubmitting(false)
     setSubmitted(true)
   }
@@ -646,7 +666,7 @@ function InquiryForm() {
               Your inquiry has been submitted successfully. Our team will contact you within 24 hours.
             </p>
             <button
-              onClick={() => setSubmitted(false)}
+              onClick={() => { setSubmitted(false); setForm({ name: '', phone: '', city: '', inquiryType: '', product: '', quantity: '', message: '' }) }}
               className="px-6 py-3 bg-primary text-primary-foreground font-bold border-4 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
             >
               Submit Another Inquiry
@@ -736,36 +756,35 @@ function InquiryForm() {
             className="bg-background border-2 md:border-4 border-foreground p-4 md:p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
           >
             <div className="space-y-4">
-              {[
-                { id: 'name', label: 'Full Name *', type: 'text', placeholder: 'Enter your name', required: true },
-                { id: 'phone', label: 'Phone Number *', type: 'tel', placeholder: '+91 XXXXX XXXXX', required: true },
-                { id: 'city', label: 'City *', type: 'text', placeholder: 'Enter your city', required: true },
-              ].map(({ id, label, type, placeholder, required }) => (
-                <div key={id}>
-                  <label htmlFor={id} className="block text-sm font-bold text-foreground mb-2">
-                    {label}
-                  </label>
-                  <input
-                    type={type}
-                    id={id}
-                    name={id}
-                    required={required}
-                    className="w-full px-4 py-3 bg-card border-4 border-foreground text-foreground font-medium focus:border-primary focus:outline-none transition-colors"
-                    placeholder={placeholder}
-                  />
-                </div>
-              ))}
-
+              {/* Name */}
               <div>
-                <label htmlFor="inquiryType" className="block text-sm font-bold text-foreground mb-2">
-                  Inquiry Type *
-                </label>
-                <select
-                  id="inquiryType"
-                  name="inquiryType"
-                  required
+                <label htmlFor="name" className="block text-sm font-bold text-foreground mb-2">Full Name *</label>
+                <input type="text" id="name" name="name" required value={form.name} onChange={handleChange}
                   className="w-full px-4 py-3 bg-card border-4 border-foreground text-foreground font-medium focus:border-primary focus:outline-none transition-colors"
-                >
+                  placeholder="Enter your name" />
+              </div>
+
+              {/* Phone */}
+              <div>
+                <label htmlFor="phone" className="block text-sm font-bold text-foreground mb-2">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" required value={form.phone} onChange={handleChange}
+                  className="w-full px-4 py-3 bg-card border-4 border-foreground text-foreground font-medium focus:border-primary focus:outline-none transition-colors"
+                  placeholder="+91 XXXXX XXXXX" />
+              </div>
+
+              {/* City */}
+              <div>
+                <label htmlFor="city" className="block text-sm font-bold text-foreground mb-2">City *</label>
+                <input type="text" id="city" name="city" required value={form.city} onChange={handleChange}
+                  className="w-full px-4 py-3 bg-card border-4 border-foreground text-foreground font-medium focus:border-primary focus:outline-none transition-colors"
+                  placeholder="Enter your city" />
+              </div>
+
+              {/* Inquiry Type */}
+              <div>
+                <label htmlFor="inquiryType" className="block text-sm font-bold text-foreground mb-2">Inquiry Type *</label>
+                <select id="inquiryType" name="inquiryType" required value={form.inquiryType} onChange={handleChange}
+                  className="w-full px-4 py-3 bg-card border-4 border-foreground text-foreground font-medium focus:border-primary focus:outline-none transition-colors">
                   <option value="">Select inquiry type</option>
                   {inquiryTypes.map((type) => (
                     <option key={type} value={type}>{type}</option>
@@ -773,16 +792,11 @@ function InquiryForm() {
                 </select>
               </div>
 
+              {/* Product */}
               <div>
-                <label htmlFor="product" className="block text-sm font-bold text-foreground mb-2">
-                  Product Interested In *
-                </label>
-                <select
-                  id="product"
-                  name="product"
-                  required
-                  className="w-full px-4 py-3 bg-card border-4 border-foreground text-foreground font-medium focus:border-primary focus:outline-none transition-colors"
-                >
+                <label htmlFor="product" className="block text-sm font-bold text-foreground mb-2">Product Interested In *</label>
+                <select id="product" name="product" required value={form.product} onChange={handleChange}
+                  className="w-full px-4 py-3 bg-card border-4 border-foreground text-foreground font-medium focus:border-primary focus:outline-none transition-colors">
                   <option value="">Select a product</option>
                   {productOptions.map((p) => (
                     <option key={p} value={p}>{p}</option>
@@ -790,30 +804,20 @@ function InquiryForm() {
                 </select>
               </div>
 
+              {/* Quantity */}
               <div>
-                <label htmlFor="quantity" className="block text-sm font-bold text-foreground mb-2">
-                  Quantity (Optional)
-                </label>
-                <input
-                  type="text"
-                  id="quantity"
-                  name="quantity"
+                <label htmlFor="quantity" className="block text-sm font-bold text-foreground mb-2">Quantity (Optional)</label>
+                <input type="text" id="quantity" name="quantity" value={form.quantity} onChange={handleChange}
                   className="w-full px-4 py-3 bg-card border-4 border-foreground text-foreground font-medium focus:border-primary focus:outline-none transition-colors"
-                  placeholder="e.g., 100 kg, 50 liters"
-                />
+                  placeholder="e.g., 100 kg, 50 liters" />
               </div>
 
+              {/* Message */}
               <div>
-                <label htmlFor="message" className="block text-sm font-bold text-foreground mb-2">
-                  Additional Message (Optional)
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
+                <label htmlFor="message" className="block text-sm font-bold text-foreground mb-2">Additional Message (Optional)</label>
+                <textarea id="message" name="message" rows={4} value={form.message} onChange={handleChange}
                   className="w-full px-4 py-3 bg-card border-4 border-foreground text-foreground font-medium focus:border-primary focus:outline-none transition-colors resize-none"
-                  placeholder="Any specific requirements or questions?"
-                />
+                  placeholder="Any specific requirements or questions?" />
               </div>
 
               <button
@@ -923,11 +927,11 @@ function Contact() {
 
 // ─── FOOTER ────────────────────────────────────────────────────────────────────
 const quickLinks = [
-  { href: '#about',    label: 'About Us' },
+  { href: '#about', label: 'About Us' },
   { href: '#products', label: 'Products' },
-  { href: '#dealer',   label: 'Become a Dealer' },
-  { href: '#inquiry',  label: 'Order Online' },
-  { href: '#contact',  label: 'Contact' },
+  { href: '#dealer', label: 'Become a Dealer' },
+  { href: '#inquiry', label: 'Order Online' },
+  { href: '#contact', label: 'Contact' },
 ]
 
 const footerProducts = ['Cattle Feed', 'Mustard Oil', 'Churi / Feed Mixture']
