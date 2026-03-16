@@ -149,7 +149,7 @@ function Hero() {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-2 md:gap-4 pt-4 md:pt-6">
               <div className="p-2 md:p-3 bg-card border-2 md:border-4 border-foreground">
-                <p className="text-lg sm:text-xl md:text-2xl font-bold text-primary">20+</p>
+                <p className="text-lg sm:text-xl md:text-2xl font-bold text-primary">5+</p>
                 <p className="text-xs md:text-sm text-muted-foreground font-medium">Years Experience</p>
               </div>
               <div className="p-2 md:p-3 bg-card border-2 md:border-4 border-foreground">
@@ -326,8 +326,8 @@ function Slideshow() {
                 key={index}
                 onClick={() => setCurrentIndex(index)}
                 className={`w-3 h-3 border-2 border-foreground transition-all ${index === currentIndex
-                    ? slide.type === 'video' ? 'bg-primary scale-125' : 'bg-secondary scale-125'
-                    : 'bg-card'
+                  ? slide.type === 'video' ? 'bg-primary scale-125' : 'bg-secondary scale-125'
+                  : 'bg-card'
                   }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
@@ -346,8 +346,8 @@ function Slideshow() {
                 key={index}
                 onClick={() => setCurrentIndex(index)}
                 className={`w-4 h-4 border-4 border-foreground transition-all ${index === currentIndex
-                    ? slide.type === 'video' ? 'bg-primary scale-125' : 'bg-secondary scale-125'
-                    : 'bg-card hover:bg-muted'
+                  ? slide.type === 'video' ? 'bg-primary scale-125' : 'bg-secondary scale-125'
+                  : 'bg-card hover:bg-muted'
                   }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
@@ -361,8 +361,8 @@ function Slideshow() {
                 key={index}
                 onClick={() => setCurrentIndex(index)}
                 className={`relative w-20 h-14 flex-shrink-0 border-4 overflow-hidden transition-all ${index === currentIndex
-                    ? 'border-primary shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
-                    : 'border-foreground opacity-70 hover:opacity-100'
+                  ? 'border-primary shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
+                  : 'border-foreground opacity-70 hover:opacity-100'
                   }`}
               >
                 {slide.type === 'image' ? (
@@ -950,8 +950,8 @@ function Footer() {
                 <img
                   src={LOGO_SRC}
                   alt="Amrita Agro Industries"
-                  width={50}
-                  height={50}
+                  width={70}
+                  height={70}
                   className="object-contain"
                 />
               </div>
@@ -962,7 +962,7 @@ function Footer() {
             </div>
             <p className="text-background/80 mb-4 leading-relaxed">
               Trusted agricultural manufacturing from Fatehabad, Haryana. Quality cattle feed and pure mustard
-              oil for over two decades.
+              oil Since 2021.
             </p>
             <p className="text-sm text-background/60">
               शुद्धता का प्रतीक<br />
